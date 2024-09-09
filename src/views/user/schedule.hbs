@@ -1,0 +1,57 @@
+<div class="max-w-5xl mx-auto mb-4 sm:px-6 lg:px-8">
+  <div class="overflow-auto bg-gray-100/20 backdrop-blur-md shadow-md mt-12 text-white">
+    <h1 class="text-center text-2xl font-bold my-5">SOLICITUD DE AUDIENCIA</h1>
+    <table class="table-fixed w-full">
+      <tbody>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Rut/Numero de Documento: <span id="rut">{{client.run}}{{client.numero_documento}}</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Nombre: <span id="nombre">{{client.nombre}}</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Apellidos: <span id="apellido">{{client.apellido}}</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Telefono: <span id="telefono">{{client.telefono}}</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Correo: <span id="email">{{client.email}}</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 text-center font-bold my-2">Nacionalidad: <span id="nacionalidad">{{nacionalidad}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto mb-4 sm:px-6 lg:px-8">
+  <div class="bg-white overflow-auto shadow-xl sm:rounded-lg mt-12">
+
+    <table class="table-fixed w-full">
+      <thead>
+        <tr class="bg-lime-600 text-white">
+          <th class="w-1/4 py-4 ...">Fecha</th>
+          <th class="w-28 py-4 ...">Hora inicio</th>
+          <th class="w-28 py-4 ...">Hora termino</th>
+          <th class="w-20 py-4 ...">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each hours}}
+        <tr>
+          <td class="p-3 text-center">{{Fecha}}</td>
+          <td class="p-3 text-center">{{Hora_Inicio}}</td>
+          <td class="p-3 text-center">{{Hora_Termino}}</td>
+          <td class="p-3 text-center">
+            <button class="bg-lime-600 text-white px-5 py-1 rounded-sm btn_send hover:bg-lime-700" type="submit" onclick="a({{idHorario}},'{{Hora_Inicio}}','{{Fecha}}')">
+            <i class="fas fa-calendar-check"></i></button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="/static/js/alert.js"></script>

@@ -1,0 +1,243 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema solicitud_audiencia
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema solicitud_audiencia
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `solicitud_audiencia` DEFAULT CHARACTER SET utf8 ;
+USE `solicitud_audiencia` ;
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`nacionalidad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`nacionalidad` (
+  `idNacionalidad` INT(11) NOT NULL AUTO_INCREMENT,
+  `Nacionalidad` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idNacionalidad`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`sesiones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`sesiones` (
+  `idsesiones` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  PRIMARY KEY (`idsesiones`)) 
+ENGINE = InnoDB 
+AUTO_INCREMENT = 1 
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`chileno`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`chileno` (
+  `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `Run` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Nacionalidad_idNacionalidad` INT(11) NOT NULL,
+  PRIMARY KEY (`idCliente`),
+  INDEX `fk_Cliente_Nacionalidad2_idx` (`Nacionalidad_idNacionalidad` ASC) ,
+  CONSTRAINT `fk_Cliente_Nacionalidad2`
+    FOREIGN KEY (`Nacionalidad_idNacionalidad`)
+    REFERENCES `solicitud_audiencia`.`nacionalidad` (`idNacionalidad`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`extranjero`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`extranjero` (
+  `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `Numero_Documento` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Nacionalidad_idNacionalidad` INT(11) NOT NULL,
+  PRIMARY KEY (`idCliente`),
+  INDEX `fk_Cliente_Nacionalidad2_idx` (`Nacionalidad_idNacionalidad` ASC) ,
+  CONSTRAINT `fk_Cliente_Nacionalidad20`
+    FOREIGN KEY (`Nacionalidad_idNacionalidad`)
+    REFERENCES `solicitud_audiencia`.`nacionalidad` (`idNacionalidad`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`cliente` (
+  `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `Extranjero_idCliente` INT(11) NULL DEFAULT NULL,
+  `Chileno_idCliente` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`idCliente`),
+  INDEX `fk_Cliente_Extranjero1_idx` (`Extranjero_idCliente` ASC) ,
+  INDEX `fk_Cliente_Chileno1_idx` (`Chileno_idCliente` ASC) ,
+  CONSTRAINT `fk_Cliente_Chileno1`
+    FOREIGN KEY (`Chileno_idCliente`)
+    REFERENCES `solicitud_audiencia`.`chileno` (`idCliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Cliente_Extranjero1`
+    FOREIGN KEY (`Extranjero_idCliente`)
+    REFERENCES `solicitud_audiencia`.`extranjero` (`idCliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`fecha`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`fecha` (
+  `idFecha` INT(11) NOT NULL AUTO_INCREMENT,
+  `Fecha` DATE NOT NULL,
+  PRIMARY KEY (`idFecha`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`hora`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`hora` (
+  `idHora` INT(11) NOT NULL AUTO_INCREMENT,
+  `Hora_Inicio` TIME NOT NULL,
+  `Hora_Termino` TIME NOT NULL,
+  PRIMARY KEY (`idHora`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`horario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`horario` (
+  `idHorario` INT(11) NOT NULL AUTO_INCREMENT,
+  `Fecha_idFecha` INT(11) NOT NULL,
+  `Hora_idHora` INT(11) NOT NULL,
+  PRIMARY KEY (`idHorario`),
+  INDEX `fk_Fecha_has_Hora_Hora1_idx` (`Hora_idHora` ASC) ,
+  INDEX `fk_Fecha_has_Hora_Fecha1_idx` (`Fecha_idFecha` ASC) ,
+  CONSTRAINT `fk_Fecha_has_Hora_Fecha1`
+    FOREIGN KEY (`Fecha_idFecha`)
+    REFERENCES `solicitud_audiencia`.`fecha` (`idFecha`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Fecha_has_Hora_Hora1`
+    FOREIGN KEY (`Hora_idHora`)
+    REFERENCES `solicitud_audiencia`.`hora` (`idHora`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `solicitud_audiencia`.`agenda`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitud_audiencia`.`agenda` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Horario_idHorario` INT(11) NOT NULL,
+  `Cliente_idCliente` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Agenda_Cliente1_idx` (`Cliente_idCliente` ASC) ,
+  INDEX `fk_Agenda_Fecha_has_Hora1_idx` (`Horario_idHorario` ASC) ,
+  CONSTRAINT `fk_Agenda_Cliente1`
+    FOREIGN KEY (`Cliente_idCliente`)
+    REFERENCES `solicitud_audiencia`.`cliente` (`idCliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Agenda_Fecha_has_Hora1`
+    FOREIGN KEY (`Horario_idHorario`)
+    REFERENCES `solicitud_audiencia`.`horario` (`idHorario`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+USE `solicitud_audiencia`;
+
+DELIMITER $$
+USE `solicitud_audiencia`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `solicitud_audiencia`.`cliente_BEFORE_DELETE`
+BEFORE DELETE ON `solicitud_audiencia`.`cliente`
+FOR EACH ROW
+BEGIN
+	delete from chileno where OLD.Chileno_idCliente = chileno.idCliente;
+    delete from extranjero where OLD.Extranjero_idCliente = extranjero.idCliente;
+END$$
+
+USE `solicitud_audiencia`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `solicitud_audiencia`.`horario_AFTER_DELETE`
+AFTER DELETE ON `solicitud_audiencia`.`horario`
+FOR EACH ROW
+BEGIN
+    delete from fecha where OLD.Fecha_idFecha = idFecha;
+END$$
+
+USE `solicitud_audiencia`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `solicitud_audiencia`.`horario_BEFORE_DELETE`
+BEFORE DELETE ON `solicitud_audiencia`.`horario`
+FOR EACH ROW
+BEGIN
+	delete from agenda where OLD.idHorario = agenda.Horario_idHorario;
+    delete from hora where OLD.Hora_idHora = idHora;
+END$$
+
+USE `solicitud_audiencia`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `solicitud_audiencia`.`agenda_BEFORE_DELETE`
+BEFORE DELETE ON `solicitud_audiencia`.`agenda`
+FOR EACH ROW
+BEGIN
+	delete from cliente where OLD.Cliente_idCliente = idCliente;
+END$$
+
+
+DELIMITER ;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `solicitud_audiencia`.`nacionalidad` (`idNacionalidad`, `Nacionalidad`) VALUES ('1', 'Chileno');
+INSERT INTO `solicitud_audiencia`.`nacionalidad` (`idNacionalidad`, `Nacionalidad`) VALUES ('2', 'Extranjero');

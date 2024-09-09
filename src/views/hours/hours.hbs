@@ -1,0 +1,70 @@
+<div class="max-w-2xl mx-auto mb-4 sm:px-6 lg:px-8">
+<div class="block mx-auto my-12 p-8 bg-white border border-gray-200 rounded-md shadow-lg text-gray-800">
+
+  <h1 class="text-center text-3xl font-bold">Ingresar nueva hora</h1>
+
+  <form action="/horas/create" method="POST" class="mt-4">
+
+    <input type="text" onfocus="(this.type='date')" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 
+      p-2 my-2 focus:bg-white" placeholder="Fecha" name="fecha" value="{{Fecha}}" required>
+
+    <input type="text" onfocus="(this.type='time')" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 
+      p-2 my-2 focus:bg-white" placeholder="Hora de inicio" name="hora_inicio" value="{{Hora_Inicio}}" required>
+
+    <input type="text" onfocus="(this.type='time')" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 
+      p-2 my-2 focus:bg-white" placeholder="Hora de termino" name="hora_termino" value="{{Hora_Termino}}" required>
+
+    <button type="submit" class="rounded-md bg-blue-700 w-full text-lg text-white font-semibold p-2 my-3
+      hover:bg-blue-600 focus:bg-blue-700">Guardar</button>
+
+  </form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mb-4 sm:px-6 lg:px-8">
+  <button id="btn_filter" class="bg-[#f8f9fa] text-black px-2 py-1 mt-3 border border-[#dee2e6] rounded-md shadow-md hover:bg-[#dee2e6]">
+  <i class="bi bi-funnel-fill"></i></button>
+  <button class="rounded-md bg-red-500 text-base text-white font-semibold py-1 px-3 ml-5 shadow-md
+  hover:bg-red-600 focus:red-blue-600" id="all" onclick="window.location.replace('/horas')">Mostrar todas</button>
+  <div id="filters" class="mt-3 bg-slate-300/50 border border-slate-300 rounded-md shadow-md hidden">
+    <div class="p-3 bg-slate-300/60">
+      <h1 class="text-base font-semibold">Buscar fecha exacta</h1>
+      <form action="/horas/buscar" method="GET" class="contents">
+        <input class="border border-gray-400 p-1 rounded-md text-base w-1/6" type="date" name="fecha" value="{{Fecha_}}" >
+        <button type="submit" class="rounded-md bg-blue-700 text-base text-white font-semibold py-1 px-3
+        hover:bg-blue-600 focus:bg-blue-700">Buscar</button>
+      </form>
+    </div>
+  </div>
+  <div class="bg-white overflow-auto shadow-xl sm:rounded-md mt-5">
+
+    <table class="table-fixed">
+      <thead>
+        <tr class="bg-blue-500 text-white">
+          <th class="whitespace-nowrap w-20 py-4 ...">ID</th>
+          <th class="whitespace-nowrap w-1/4 py-4 ...">Fecha</th>
+          <th class="whitespace-nowrap w-1/2 py-4 ...">Hora inicio</th>
+          <th class="whitespace-nowrap w-28 py-4 ...">Hora termino</th>
+          <th class="whitespace-nowrap w-28 py-4 ...">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each hours}}
+        <tr class="even:bg-slate-200">
+          <td class="py-3 px-6">{{idHorario}}</td>
+          <td class="p-3 text-center">{{Fecha}}</td>
+          <td class="p-3 text-center">{{Hora_Inicio}}</td>
+          <td class="p-3 text-center">{{Hora_Termino}}</td>
+          <td class="p-3 flex">
+            <form action="/horas/delete/{{idHorario}}" method="get" class="mx-2">
+              <button class="bg-red-600 text-white px-3 py-1 rounded-sm hover:bg-red-700" type="submit">
+                <i class="fa fa-solid fa-trash"></i></button>
+            </form>
+            <a href="/horas/edit/{{idHorario}}" class="bg-blue-700 text-white px-3 py-1 rounded-sm hover:bg-blue-800">
+              <i class="bi bi-pencil-square"></i></a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

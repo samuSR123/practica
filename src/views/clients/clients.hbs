@@ -1,0 +1,76 @@
+<div class="max-w-7xl mx-auto mb-4 sm:px-6 lg:px-8">
+  <div class="bg-white overflow-auto shadow-xl sm:rounded-md mt-12">
+    <table class="table-fixed">
+      <thead>
+        <tr class="bg-blue-500 text-white">
+          <th class="w-20 py-4 ...">ID</th>
+          <th class="w-28 py-4 ...">Run</th>
+          <th class="w-1/4 py-4 ...">Nombre</th>
+          <th class="w-1/2 py-4 ...">Apellido</th>
+          <th class="w-28 py-4 ...">Telefono</th>
+          <th class="w-1/4 py-4 ...">Email</th>
+          <th class="w-32 py-4 ...">Nacionalidad</th>
+          <th class="w-28 py-4 ...">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each c}}
+        <tr class="even:bg-slate-200">
+          <td class="py-3 px-6">{{idCliente}}</td>
+          <td class="py-3 px-6 whitespace-nowrap text-center">{{Run}}</td>
+          <td class="p-3 text-center">{{Nombre}}</td>
+          <td class="p-3 text-center">{{Apellido}}</td>
+          <td class="p-3 text-center">{{Telefono}}</td>
+          <td class="p-3 text-center">{{Email}}</td>
+          <td class="p-3 text-center">{{Nacionalidad}}</td>
+          <td class="p-3 flex">
+            <form action="/clientes/delete/{{idCliente}}" method="get" class="mx-2">
+              <button class="bg-red-600 text-white px-3 py-1 rounded-sm hover:bg-red-700" type="submit">
+                <i class="fas fa-trash"></i></button>
+            </form>
+            {{!-- <a href="/clientes/edit/{{idCliente}}" class="bg-blue-500 text-white px-3 py-1 rounded-sm">
+              <i class="fas fa-pen"></i></a> --}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+    <div class="bg-white overflow-auto shadow-xl sm:rounded-md mt-12">
+    <table class="table-fixed">
+      <thead>
+        <tr class="bg-blue-500 text-white">
+          <th class="w-20 py-4 ...">ID</th>
+          <th class="w-28 py-4 ...">N documento</th>
+          <th class="w-1/4 py-4 ...">Nombre</th>
+          <th class="w-1/2 py-4 ...">Apellido</th>
+          <th class="w-28 py-4 ...">Telefono</th>
+          <th class="w-1/4 py-4 ...">Email</th>
+          <th class="w-32 py-4 ...">Nacionalidad</th>
+          <th class="w-28 py-4 ...">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each e}}
+        <tr class="even:bg-slate-200">
+          <td class="py-3 px-6">{{idCliente}}</td>
+          <td class="py-3 px-6 whitespace-nowrap text-center">{{Numero_Documento}}</td>
+          <td class="p-3 text-center">{{Nombre}}</td>
+          <td class="p-3 text-center">{{Apellido}}</td>
+          <td class="p-3 text-center">{{Telefono}}</td>
+          <td class="p-3 text-center">{{Email}}</td>
+          <td class="p-3 text-center">{{Nacionalidad}}</td>
+          <td class="p-3 flex">
+            <form action="/clientes/delete/{{idCliente}}" method="get" class="mx-2">
+              <button class="bg-red-600 text-white px-3 py-1 rounded-sm hover:bg-red-700" type="submit">
+                <i class="fas fa-trash"></i></button>
+            </form>
+            {{!-- <a href="/clientes/edit/{{idCliente}}" class="bg-blue-500 text-white px-3 py-1 rounded-sm">
+              <i class="fas fa-pen"></i></a> --}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

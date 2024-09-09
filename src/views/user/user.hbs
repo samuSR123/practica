@@ -1,0 +1,130 @@
+<style>
+	.social div a {
+		display: inline-block;
+		color:#fff;
+		background: #000;
+		padding: 15px 20px;
+		text-decoration: none;
+		-webkit-transition:all 500ms ease;
+		-o-transition:all 500ms ease;
+		transition:all 500ms ease;
+	}
+
+  @media (max-width: 768px) {
+    .social div a {
+      padding: 15px 35px;
+    }
+    .social div a:hover {
+		  opacity: .8;
+	  }
+  } 
+
+	.social div .icon-facebook {background:#3b5998;}
+	.social div .icon-twitter {background: #000;}
+	.social div .icon-instagram {background: linear-gradient(to right,#833ab4,#fd1d1d,#fcb045)}
+	.social div .icon-bank {background: #97bd38;}
+
+	.social div a:hover {
+		padding: 15px 35px;
+	}
+</style>
+<div class="flex justify-center">
+  <img class="md:flex hidden w-1/6" src="https://ligup-v2.s3.amazonaws.com/nacimiento/photos/26187_logo_municipal_nacimiento.png">
+</div>
+<div class="block mx-auto md:my-1 p-8 bg-white max-w-xl border border-gray-200 shadow-lg text-black">
+  <h1 class="text-center text-3xl font-bold mb-5">Ingresar</h1>
+  <div>
+    <fieldset>
+    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg sm:flex ">
+    <li class="w-full">
+        <div class="flex items-center ps-3">
+            <input id="chileno" type="radio" value="Chileno" name="usuario" class="hidden peer" checked="" oninput="tipo_usuario()">
+            <label for="chileno" class="w-full my-2 py-3 border-2 ms-2 text-base font-medium from-lime-500 to-lime-600 text-gray-900 peer-checked:bg-gradient-to-r
+             peer-checked:text-white border-lime-500 rounded-full text-center hover:bg-gradient-to-r hover:text-white transition duration-200">
+              <span>Chileno</span>
+            </label>
+        </div>
+    </li>
+    <li class="w-full">
+        <div class="flex items-center ps-3">
+            <input id="extranjero" type="radio" value="Extranjero" name="usuario" class="hidden peer" oninput="tipo_usuario()">
+            <label for="extranjero" class="w-full my-2 py-3 border-2 ms-2 text-base font-medium from-lime-500 to-lime-600 text-gray-900 peer-checked:bg-gradient-to-r
+             peer-checked:text-white border-lime-500 rounded-full text-center hover:bg-gradient-to-r hover:text-white transition duration-200">
+              <span>Extranjero</span>
+            </label>
+        </div>
+    </li>
+    </ul>
+  </fieldset>
+  </div>
+  <div id="chl" class="block">  
+    <form action="/usuario/create" method="POST" class="mt-4">
+
+    <app-input type="text" input_id="rut" input_name="run" maxlength="12" icon_id="check_ico" for="rut" label_id="label_rut" 
+    label_text="Rut" span_id="err_rut" span_text="Ingresar Rut sin punto ni guión"></app-input>
+
+    <app-input type="text" input_id="nombre" input_name="nombre" disabled="disabled" icon_id="check_ico_nombre" for="nombre" 
+    label_id="label_nombre" label_text="Nombre" span_id="err_nombre" span_text="Nombre invalido"></app-input>
+
+    <app-input type="text" input_id="apellido" input_name="apellido" disabled="disabled" icon_id="check_ico_apellido" for="apellido" 
+    label_id="label_apellido" label_text="Apellido" span_id="err_apellido" span_text="Apellido invalido"></app-input>
+
+    <app-input type="number" input_id="telefono" input_name="telefono" minlength="7"  maxlength="14" disabled="disabled" 
+    icon_id="check_ico_telefono" for="telefono" label_id="label_telefono" label_text="Telefono" span_id="err_telefono" span_text="Telefono invalido"></app-input>
+
+    <app-input type="text" input_id="email" input_name="email" disabled="disabled" icon_id="check_ico_email" for="email" 
+    label_id="label_email" label_text="Email" span_id="err_email" span_text="Email invalido"></app-input>
+
+    <app-button id_="save"></app-button>
+
+    </form>
+  </div>
+
+  <div id="ext" class="hidden">  
+    <form action="/usuario/create/extranjero" method="POST" class="mt-4">
+
+    <app-input type="text" input_id="num_doc" input_name="numero_documento" icon_id="check_ico_ext" for="num_doc" label_id="label_num_doc" 
+    label_text="Numero de documento" span_id="err_num_doc" span_text="Ingresar Numero de Documento"></app-input>
+
+    <app-input type="text" input_id="nombre_ext" input_name="nombre" disabled="disabled" icon_id="check_ico_nombre_ext" for="nombre_ext" 
+    label_id="label_nombre_ext" label_text="Nombre" span_id="err_nombre_ext" span_text="Nombre invalido"></app-input>
+
+    <app-input type="text" input_id="apellido_ext" input_name="apellido" disabled="disabled" icon_id="check_ico_apellido_ext" for="apellido_ext" 
+    label_id="label_apellido_ext" label_text="Apellido" span_id="err_apellido_ext" span_text="Apellido invalido"></app-input>
+    
+    <app-input type="number" input_id="telefono_ext" input_name="telefono" minlength="7"  maxlength="14" disabled="disabled" 
+    icon_id="check_ico_telefono_ext" for="telefono_ext" label_id="label_telefono_ext" label_text="Telefono" span_id="err_telefono_ext" span_text="Telefono invalido"></app-input>
+    
+    <app-input type="text" input_id="email_ext" input_name="email" disabled="disabled" icon_id="check_ico_email_ext" for="email_ext" 
+    label_id="label_email_ext" label_text="Email" span_id="err_email_ext" span_text="Email invalido"></app-input>
+    
+    <app-button id_="save_ext"></app-button>
+
+    </form>
+  </div>
+</div>
+<div class="md:fixed md:block flex flex-wrap justify-center left-0 bottom-0 md:top-52 z-50 social">
+  <div>
+    <a href="https://www.facebook.com/MunicipalidadDeNacimiento" target="_blank" class="icon-facebook">
+      <i class="bi bi-facebook"></i>
+    </a>
+  </div>
+  <div>
+    <a href="https://www.x.com/muninacto" target="_blank" class="icon-twitter">
+      <i class="bi bi-twitter-x"></i>
+    </a>
+  </div>
+  <div>
+    <a href="https://www.instagram.com/muninacto/?utm_source=ig_embed&amp;ig_rid=35d10e94-41b6-4191-860f-1e487d68e82e" target="_blank" class="icon-instagram">
+      <i class="bi bi-instagram"></i>
+    </a>
+  </div>
+  <div>
+    <a href="https://www.nacimiento.cl/home" target="_blank" class="icon-bank">
+      <i class="bi bi-bank"></i>
+    </a>
+  </div>
+</div>
+
+<script src="/static/js/components/components.js"></script>
+<script src="/static/js/script.js"></script>
