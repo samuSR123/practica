@@ -1,4 +1,4 @@
-function a(i,h,f) {
+function a(i,h,f,t) {
     swal.fire({
         title: `Agendar para el dia: ${f}  a las: ${h}`,
         showCancelButton: true,
@@ -17,7 +17,18 @@ function a(i,h,f) {
             fetch(`/horario/create/${i}`, {
                 method: 'post',
                 headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({respuesta:'si', id: rut, nombre: nombre, apellidos: apellidos, telefono: telefono, email: email, nacionalidad: nacionalidad})
+                body: JSON.stringify({
+                    respuesta:'si', 
+                    id: rut, 
+                    nombre: nombre, 
+                    apellidos: apellidos, 
+                    telefono: telefono, 
+                    email: email, 
+                    nacionalidad: nacionalidad,
+                    fecha: f,
+                    hora_inicio: h,
+                    hora_termino: t
+                })
             })
             .then((response) => response.json())
             .then((data)=>{

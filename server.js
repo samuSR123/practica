@@ -12,7 +12,6 @@ const scheduleRoutes = require('./src/routes/schedule.routes')
 const userRoutes = require('./src/routes/user.routes')
 const loginRoutes = require('./src/routes/login.routes')
 
-
 const app = express();
 const port = 3000;
 
@@ -39,7 +38,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
-
 
 app.use(bodyParser.json());
 app.use(express.json());

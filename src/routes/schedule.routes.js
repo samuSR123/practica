@@ -1,5 +1,5 @@
-const express = require('express')
-const schedule = require('../controllers/schedule.controller')
+const express = require('express');
+const schedule = require('../controllers/schedule.controller');
 var router = express.Router();
 const { auth } = require('../validators/helper');
 
